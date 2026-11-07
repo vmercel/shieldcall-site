@@ -8,11 +8,15 @@
 <meta property="og:title" content="ShieldCall: warn during the call, never drop it">
 <meta property="og:description" content="Open research on detecting AI-enabled voice impersonation and phone scams. Download the prototype or declare interest.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-card.png">
+<meta name="theme-color" content="#060E1E">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <style>
 :root{
-  --paper:#EEF1F4; --card:#FFFFFF; --ink:#0F1C2A; --mute:#52606D; --line:#C9D1D9;
-  --ac:#0B7A75;   /* acoustic stream */
-  --li:#5B3FD1;   /* linguistic stream */
+  --paper:#EEF3F7; --card:#FFFFFF; --ink:#060E1E; --brand:#0BBEE4; --navy:#060E1E; --mute:#52606D; --line:#C9D1D9;
+  --ac:#0A8FAE;   /* acoustic stream */
+  --li:#0B6F8C;   /* linguistic stream */
   --act:#D9482B;  /* warning action */
   --ok:#2F7D4F;
   --display:"Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",Georgia,serif;
@@ -25,15 +29,15 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);f
 a{color:inherit}
 :focus-visible{outline:3px solid var(--li);outline-offset:2px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
-.brand{font-family:var(--mono);font-size:14px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;text-decoration:none}
-.brand i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--act);margin-right:8px;vertical-align:0}
-nav a{font-size:14px;margin-left:20px;text-decoration:none;color:var(--mute)}
-nav a:hover{color:var(--ink)}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:var(--navy);color:#fff;border-radius:0 0 14px 14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;text-decoration:none;color:#fff}
+.brand img{width:34px;height:34px;border-radius:8px;display:block}
+nav a{font-size:14px;margin-left:20px;text-decoration:none;color:#A9C0D1}
+nav a:hover{color:#fff}
 @media(max-width:700px){nav a.hide-s{display:none}}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6vw,68px);line-height:1.04;margin:14px 0 18px;letter-spacing:-.01em}
-h1 em{font-style:italic;color:var(--act)}
+h1 em{font-style:italic;color:var(--ac)}
 h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,3.6vw,40px);line-height:1.12;margin:6px 0 14px}
 h3{font-size:17px;margin:0 0 6px}
 p{margin:0 0 14px}
@@ -43,7 +47,17 @@ p{margin:0 0 14px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:6px;border:1.5px solid var(--ink);font-weight:600;font-size:16px;text-decoration:none;background:transparent;color:var(--ink);cursor:pointer;font-family:var(--body)}
 .btn.primary{background:var(--ink);color:#fff}
 .btn:hover{transform:translateY(-1px)}
-.btn.primary:hover{background:#1c3147}
+.btn.primary:hover{background:#12263d}
+.btn.cyan{background:var(--brand);border-color:var(--brand);color:#04101f}
+.btn.cyan:hover{background:#3fd0ee}
+.beta{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;background:var(--navy);color:#EAF4FA;border-radius:14px;padding:26px}
+.beta img.app{width:96px;height:96px;border-radius:22px;box-shadow:0 6px 24px rgba(11,190,228,.25)}
+.beta h2{color:#fff;margin-top:0}
+.beta .note,.beta label{color:#A9C0D1}
+.beta input{width:100%;padding:11px 12px;border-radius:6px;border:1.5px solid #27425c;background:#0b1a30;color:#fff;font:inherit}
+.beta .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:700px){.beta{grid-template-columns:1fr}.beta .row2{grid-template-columns:1fr}}
+#betaDone{display:none;margin-top:14px;padding:14px;border:1.5px solid var(--brand);border-radius:8px;color:#fff}
 .note{font-size:14px;color:var(--mute)}
 /* simulator */
 .sim{background:var(--card);border:1.5px solid var(--ink);border-radius:10px;overflow:hidden}
@@ -57,7 +71,7 @@ p{margin:0 0 14px}
 @media(max-width:820px){.script{border-right:0;border-bottom:1px solid var(--line)}}
 .line{padding:10px 12px;border-radius:8px;background:#F3F5F7;font-size:15px;opacity:.28;transition:opacity .3s,background .3s}
 .line.on{opacity:1}
-.line.cur{background:#E9E4FB}
+.line.cur{background:#DCF1F7}
 .who{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:2px}
 .meters{padding:16px;display:flex;flex-direction:column;gap:14px}
 .m label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
@@ -112,8 +126,8 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
 <body>
 <div class="wrap">
 <header class="top">
-  <a class="brand" href="#top"><i></i>ShieldCall</a>
-  <nav><a href="#how" class="hide-s">How it works</a><a href="#status" class="hide-s">Status</a><a href="#download">Download</a><a href="#interest">Declare interest</a></nav>
+  <a class="brand" href="#top"><img src="assets/shieldcall-icon-96.png" alt="" width="34" height="34">ShieldCall</a>
+  <nav><a href="#how" class="hide-s">How it works</a><a href="#status" class="hide-s">Status</a><a href="#beta">iPhone beta</a><a href="#download">Code</a><a href="#interest">Declare interest</a></nav>
 </header>
 
 <main id="top">
@@ -123,8 +137,9 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
     <h1>Warn people <em>during</em> the call. Never drop it.</h1>
     <p class="lede">ShieldCall is research on detecting two things that caller ID cannot: a scam script, and a voice that is cloned or synthetic. It listens with consent, scores the language and the audio separately, and warns the person to verify. If it fails, the call goes on.</p>
     <div class="cta">
+      <a class="btn cyan" href="#beta">Get the iPhone beta</a>
       <a class="btn primary" href="#interest">Declare interest</a>
-      <a class="btn" href="#download">Download the prototype</a>
+      <a class="btn" href="#download">Get the code</a>
       <a class="btn" href="https://github.com/vmercel/shieldcall-core" rel="noopener">Star on GitHub</a>
     </div>
     <p class="note" style="margin-top:12px">Research prototype. Not a certified product, not deployed, and not proven on real calls. <a href="#status">What is and is not done.</a></p>
@@ -210,9 +225,30 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:14px;color
   </ol>
 </section>
 
+<section id="beta">
+  <div class="beta">
+    <img class="app" src="assets/shieldcall-icon-512.png" alt="ShieldCall app icon" width="96" height="96">
+    <div>
+      <div class="eyebrow" style="color:#7FDDF2">iPhone beta &middot; TestFlight &middot; free</div>
+      <h2>Try the ShieldCall app on your iPhone</h2>
+      <p>Register below and you will get the TestFlight link for the research build. It needs iOS and Apple's free TestFlight app. It is a prototype: it scores scam language on this phone while a call is on speaker, warns you, and never hangs up. Expect rough edges, and please tell me about false alarms and misses.</p>
+      <form id="bf" novalidate>
+        <div class="row2">
+          <label>Your name<input id="bn" autocomplete="name" required></label>
+          <label>Your email (to send you updates)<input id="be" type="email" autocomplete="email" required></label>
+        </div>
+        <label style="display:flex;gap:8px;align-items:flex-start;font-size:14px"><input id="bc" type="checkbox" style="width:auto;margin-top:4px"> I understand this is a research prototype, not a certified fraud-protection product, and I will only analyze calls I have the legal right to analyze.</label>
+        <p style="margin-top:14px"><button class="btn cyan" type="submit" id="bb">Register and get the TestFlight link</button> <span class="status" id="bs" role="status"></span></p>
+      </form>
+      <div id="betaDone"><strong>You are registered.</strong> <span id="betaMsg"></span> <a class="btn cyan" id="tfLink" href="#" rel="noopener" style="display:none;margin-top:10px">Open in TestFlight</a></div>
+      <p class="note">Apple review of the beta is in progress, so the join link may take a few days to open. Your email is saved to a private database that only the researcher can read. Never sold or shared.</p>
+    </div>
+  </div>
+</section>
+
 <section id="download">
   <div class="eyebrow">Download</div>
-  <h2>Get the prototype</h2>
+  <h2>Get the source code</h2>
   <div class="dl">
     <div class="card">
       <span class="pill">Detector</span><span class="pill">Python</span>
@@ -271,13 +307,13 @@ cd ShieldCallAI
 
 <footer>
   <div class="wrap" style="padding:0">
-    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="mailto:mercelvubangsi@gmail.com">mercelvubangsi@gmail.com</a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
+    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#f9949c8b9a9c958f8c9b98979e8a90b99e94989095d79a9694"><span class="__cf_email__" data-cfemail="cba6aeb9a8aea7bdbea9aaa5acb8a28baca6aaa2a7e5a8a4a6">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
     <p>Sources for the figures: <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC</a>, <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 report</a>, <a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC</a>.</p>
   </div>
 </footer>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
 var S={
  a:[["Caller","Hello, this is Officer Grant from the Social Security Administration.",.35,.08],
@@ -348,6 +384,31 @@ $('f').addEventListener('submit',function(ev){ev.preventDefault();if(!ok())retur
 $('copy').addEventListener('click',function(){if(!ok())return;var x=note();var txt='To: mercelvubangsi@gmail.com\nSubject: '+x.subject+'\n\n'+x.body;
   if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){$('st').textContent='Copied. Paste it into an email to mercelvubangsi@gmail.com.';},function(){$('st').textContent='Copy failed. Select the fields and email mercelvubangsi@gmail.com directly.';});}
   else{$('st').textContent='Copy is unavailable here. Email mercelvubangsi@gmail.com directly.';}});
+})();
+</script>
+<script>
+(function(){
+  var TF_URL=''; /* set to the public TestFlight link, e.g. https://testflight.apple.com/join/XXXXXXXX */
+  var SB='https://pfxsqwtjlyelndxutfma.supabase.co/rest/v1/interest_signups';
+  var KEYM=document.documentElement.innerHTML.match(/KEY='(eyJ[^']+)'/);
+  var KEY=KEYM?KEYM[1]:'';
+  var f=document.getElementById('bf');if(!f)return;
+  var st=document.getElementById('bs');
+  f.addEventListener('submit',function(ev){ev.preventDefault();
+    var n=document.getElementById('bn').value.trim(),e=document.getElementById('be').value.trim();
+    if(!n){st.textContent='Enter your name.';return;}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){st.textContent='Enter a valid email.';return;}
+    if(!document.getElementById('bc').checked){st.textContent='Please tick the box to continue.';return;}
+    var b=document.getElementById('bb');b.disabled=true;st.textContent='Saving...';
+    fetch(SB,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({name:n,email:e,interests:['iphone testflight beta'],message:null,source:'testflight'})})
+    .then(function(r){if(!r.ok)throw new Error(r.status);
+      f.style.display='none';var d=document.getElementById('betaDone');d.style.display='block';
+      var l=document.getElementById('tfLink');
+      if(TF_URL){l.href=TF_URL;l.style.display='inline-flex';document.getElementById('betaMsg').textContent='Install Apple\u2019s TestFlight app, then open the link below.';}
+      else{document.getElementById('betaMsg').textContent='The TestFlight link opens as soon as Apple finishes its beta review. I will email it to you.';}
+    }).catch(function(){st.textContent='Could not save. Please email mercelvubangsi@gmail.com and I will add you.';b.disabled=false;});
+  });
 })();
 </script>
 </body>
