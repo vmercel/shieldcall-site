@@ -260,11 +260,11 @@ cd ShieldCallAI
     </fieldset>
     <label class="f">Anything to add (optional)<textarea id="m" placeholder="Setting, timeline, questions."></textarea></label>
     <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-      <button class="btn primary" type="submit">Declare interest by email</button>
+      <button class="btn primary" type="submit">Declare interest</button>
       <button class="btn" type="button" id="copy">Copy the note instead</button>
       <span class="status" id="st" role="status"></span>
     </div>
-    <p class="note" style="margin:0">This page stores nothing. Your note goes only to the address that opens in your email app.</p>
+    <p class="note" style="margin:0">Your name, email and note are saved to a private database that only the researcher can read. Nothing is shared or sold, and the note is non-binding.</p>
   </form>
 </section>
 </main>
@@ -332,9 +332,19 @@ function note(){
   return {subject:'ShieldCall: interest from '+n+(o?' ('+o+')':''),body:body};
 }
 function ok(){var n=$('n').value.trim();if(!n){$('st').innerHTML='<span class="err">Enter your name so the note can be signed.</span>';$('n').focus();return false;}return true;}
-$('f').addEventListener('submit',function(ev){ev.preventDefault();if(!ok())return;var x=note();
-  location.href='mailto:mercelvubangsi@gmail.com?subject='+encodeURIComponent(x.subject)+'&body='+encodeURIComponent(x.body);
-  $('st').textContent='Your email app should open. If it did not, use "Copy the note instead" and send it to mercelvubangsi@gmail.com.';});
+var SB='https://pfxsqwtjlyelndxutfma.supabase.co/rest/v1/interest_signups',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmeHNxd3RqbHllbG5keHV0Zm1hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwODE4NjMsImV4cCI6MjEwOTY1Nzg2M30.vL7YQNSvkUs_Vx-Rv_ymkEFWi78pj3yiCVLRYAnOiyU';
+$('f').addEventListener('submit',function(ev){ev.preventDefault();if(!ok())return;
+  var e=$('e').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){$('st').innerHTML='<span class="err">Enter a valid email so I can reply.</span>';$('e').focus();return;}
+  var t=[].slice.call(document.querySelectorAll('input[name=t]:checked')).map(function(x){return x.value});
+  var o=$('o').value.trim(),r=$('r').value.trim();
+  var row={name:$('n').value.trim(),org:(r&&o?r+', '+o:(r||o))||null,email:e,interests:t,message:$('m').value.trim()||null};
+  var btn=$('f').querySelector('button[type=submit]');btn.disabled=true;$('st').textContent='Sending...';
+  fetch(SB,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)})
+  .then(function(res){if(!res.ok)throw new Error(res.status);$('f').reset();$('st').innerHTML='<strong>Thank you. Your interest is recorded.</strong> I will reply by email. This is non-binding.';})
+  .catch(function(){var x=note();$('st').textContent='Could not save online. Opening your email app instead.';location.href='mailto:mercelvubangsi@gmail.com?subject='+encodeURIComponent(x.subject)+'&body='+encodeURIComponent(x.body);})
+  .then(function(){btn.disabled=false;});
+});
 $('copy').addEventListener('click',function(){if(!ok())return;var x=note();var txt='To: mercelvubangsi@gmail.com\nSubject: '+x.subject+'\n\n'+x.body;
   if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){$('st').textContent='Copied. Paste it into an email to mercelvubangsi@gmail.com.';},function(){$('st').textContent='Copy failed. Select the fields and email mercelvubangsi@gmail.com directly.';});}
   else{$('st').textContent='Copy is unavailable here. Email mercelvubangsi@gmail.com directly.';}});
