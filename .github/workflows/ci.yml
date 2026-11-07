@@ -1,0 +1,70 @@
+name: CI and smoke test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 9 * * 1"   # weekly check that the live site and form still work
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Inline JavaScript parses
+        run: |
+          node -e "
+          const s=require('fs').readFileSync('index.html','utf8');
+          const m=[...s.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+          if(!m.length) throw new Error('no inline script found');
+          m.forEach(x=>new Function(x[1]));
+          console.log('inline scripts ok:', m.length);"
+      - name: No secrets committed
+        run: |
+          if grep -nE "service_role|ghp_[A-Za-z0-9]{20,}|sk_live_|-----BEGIN [A-Z ]*PRIVATE KEY" index.html; then
+            echo "Secret-looking string found"; exit 1; fi
+          # any JWT in the page must carry role=anon
+          for t in $(grep -oE "eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+" index.html | sort -u); do
+            p=$(echo "$t" | cut -d. -f2 | tr '_-' '/+'); while [ $((${#p} % 4)) -ne 0 ]; do p="$p="; done
+            echo "$p" | base64 -d 2>/dev/null | grep -q '"role":"anon"' || { echo "Non-anon JWT in page"; exit 1; }
+          done
+          echo "secret scan ok"
+      - name: Required content present
+        run: |
+          for k in "Apache-2.0" "github.com/vmercel/ShieldCallAI" "github.com/vmercel/shieldcall-core" "interest_signups" "Research prototype"; do
+            grep -q "$k" index.html || { echo "Missing: $k"; exit 1; }; done
+
+  smoke-live:
+    needs: checks
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Vercel to deploy this commit
+        run: sleep 75
+      - name: Live site serves the page
+        run: |
+          curl -fsS https://shieldcall-nu.vercel.app/ | grep -q "ShieldCall" 
+          echo "site ok"
+      - name: Live site matches repo
+        run: |
+          curl -fsS https://shieldcall-nu.vercel.app/ | sha256sum | cut -d' ' -f1 > live.sha
+          sha256sum index.html | cut -d' ' -f1 > repo.sha
+          cmp live.sha repo.sha || echo "::warning::Live page differs from index.html (deploy may still be in progress)"
+      - name: Database rules hold (insert allowed path exists, reading blocked)
+        run: |
+          URL=$(grep -oE "https://[a-z0-9]+\.supabase\.co/rest/v1/interest_signups" index.html | head -1)
+          KEY=$(grep -oE "eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+" index.html | head -1)
+          code=$(curl -s -o /dev/null -w "%{http_code}" "$URL?select=*" -H "apikey: $KEY" -H "Authorization: Bearer $KEY")
+          echo "anon read status: $code"
+          [ "$code" = "401" ] || [ "$code" = "403" ] || { echo "Anon can read signups or API is down"; exit 1; }
+          bad=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$URL" -H "apikey: $KEY" -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" -d '{"name":"ci","email":"not-an-email"}')
+          echo "invalid insert status: $bad"
+          [ "$bad" = "400" ] || { echo "Validation not enforced"; exit 1; }
