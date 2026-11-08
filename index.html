@@ -223,19 +223,19 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 .gapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:8px 0 18px}
 .gapgrid .card h3{margin:0 0 8px;font-size:17px}
 .gapgrid .card.hot{border:2px solid var(--act);background:#FFF8F6}
-.gapgrid ul,.stg ul{margin:0;padding-left:18px;font-size:14.5px;color:#26343F}
-.gapgrid li,.stg li{margin:4px 0}
+.gapgrid ul,.asg ul{margin:0;padding-left:18px;font-size:14.5px;color:#26343F}
+.gapgrid li,.asg li{margin:4px 0}
 .proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:0 0 6px}
 .proof div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .proof b{display:block;font:700 26px var(--display)}
 .proof b.r{color:var(--act)}
 .proof span{font-size:13px;color:var(--mute)}
 .e2e{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;text-align:left;margin:14px 0 8px;position:relative}
-.stg{text-align:left;background:#fff;border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:10px;padding:14px 14px 12px;position:relative;min-width:0}
-.stg.l{border-top-color:var(--li)}.stg.a{border-top-color:var(--ac)}.stg.f{border-top-color:var(--act)}
-.stg .n{font:700 11px var(--mono);letter-spacing:.1em;color:var(--mute)}
-.stg h4{margin:2px 0 8px;font-size:16px}
-.stg .tag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin:6px 4px 0 0}
+.asg{text-align:left;background:#fff;border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:10px;padding:14px 14px 12px;position:relative;min-width:0}
+.asg.l{border-top-color:var(--li)}.asg.a{border-top-color:var(--ac)}.asg.f{border-top-color:var(--act)}
+.asg .an{font:700 11px var(--mono);letter-spacing:.1em;color:var(--mute)}
+.asg h4{margin:2px 0 8px;font-size:16px}
+.asg .atag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin:6px 4px 0 0}
 .tg-m{background:#E4F3EA;color:#1f6a3e}.tg-i{background:#FFF1D6;color:#7a5200}.tg-p{background:#EEF1F4;color:#52606D}
 .split2{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
 .pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:s;margin:12px 0 20px}
@@ -245,6 +245,35 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 .tbl-wrap{overflow-x:auto}
 .hist td:nth-child(2){font-family:var(--mono);white-space:nowrap}
 .hist tr.rej td{color:#8a3a29}
+.adg{margin:16px 0 8px}
+.adg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px}
+.adg svg{display:block;width:100%;min-width:860px;height:auto;font-family:var(--body)}
+.adg .zl{font:700 11px var(--mono);letter-spacing:.12em;fill:#52606D}
+.adg .ar{fill:none;stroke:#060E1E;stroke-width:2.5}
+.adg .nt{font:800 12px var(--mono);letter-spacing:.08em;text-anchor:middle;fill:#060E1E}
+.adg .nh{font:800 12px var(--mono);letter-spacing:.1em}
+.adg .ns{text-transform:none;font:500 12.5px var(--body);text-anchor:middle;fill:#26343F}
+.adg .ns2{font:600 11.5px var(--body);text-anchor:middle;fill:#D9482B}
+.adg .fo{font:600 12px var(--body);fill:#52606D}
+.adg .cpl rect{fill:#fff;stroke:#9CC9D6;stroke-width:1.2}
+.adg .cpl text{text-transform:none;letter-spacing:0;font:500 10.5px var(--body);text-anchor:middle;fill:#26343F}
+.adg .cpl2 rect{fill:#F4F9FC;stroke:#060E1E;stroke-width:1.4}
+.adg .cpl2 text{text-transform:none;letter-spacing:0;font:500 12px var(--body);text-anchor:middle;fill:#26343F}
+.adg .cpl2 .pn{font:800 15px var(--mono);fill:#0A8FAE}
+.adg .nd{cursor:pointer;outline:none;transition:filter .2s}
+.adg .nd:hover,.adg .nd:focus-visible{filter:drop-shadow(0 4px 10px rgba(6,14,30,.25))}
+.adg .nd.sel>rect:first-child{stroke:#0BBEE4;stroke-width:4}
+.adg .nd.b.sel>rect:first-child{stroke:#0BBEE4;stroke-width:3;stroke-dasharray:0}
+.adg .nd.sel{filter:drop-shadow(0 0 8px rgba(11,190,228,.55))}
+.adg-hint{font-size:13px;color:var(--mute);margin:8px 2px}
+.adg-btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.adg-btns button{font:600 13px var(--body);padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--mute);cursor:pointer}
+.adg-btns button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.adg-panel{background:#fff;border:1px solid var(--line);border-left:5px solid var(--brand);border-radius:12px;padding:16px 18px}
+.adg-panel h4{margin:0 0 6px;font-size:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.adg-panel p{margin:6px 0;color:#26343F;font-size:15px}
+.adg-panel .ev{font-size:13.5px;color:var(--mute);border-top:1px dashed var(--line);margin-top:10px;padding-top:8px}
+.adg-panel .atag{font:600 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
 </style>
 </head>
 <body>
@@ -395,35 +424,110 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
   <p class="note reveal" style="margin-top:8px">Measured baselines with limits, not claims about real calls. Details in the roadmap section below.</p>
 
   <h3 class="reveal" style="margin:30px 0 4px">End to end: from the call to the warning</h3>
-  <p class="reveal" style="max-width:760px;margin:0 0 4px;color:#33414D">Five stages run beside the call. Tags show the honest status of each: <span class="tag tg-m" style="margin:0">measured</span> has numbers in the public repo, <span class="tag tg-i" style="margin:0">implemented</span> exists in code but is not validated on real calls, <span class="tag tg-p" style="margin:0">planned</span> is designed only.</p>
-  <div class="e2e reveal">
-    <div class="stg"><div class="n">1 &middot; CAPTURE</div><h4>Consent and listen</h4><ul>
-      <li>Person starts a protected call and consents</li>
-      <li>Phone mic hears the other side on speaker</li>
-      <li>Analysis starts only after consent</li></ul>
-      <span class="tag tg-i">implemented (app)</span></div>
-    <div class="stg"><div class="n">2 &middot; FRONT END</div><h4>Telephone-aware audio</h4><ul>
-      <li>Resample to the 8 kHz phone band</li>
-      <li>Voice activity detection, framing</li>
-      <li>Channel simulator: band-limit, &micro;-law, packet loss</li></ul>
-      <span class="tag tg-i">implemented (core)</span></div>
-    <div class="stg l"><div class="n">3a &middot; LANGUAGE</div><h4>Scam-script stream</h4><ul>
-      <li>Transcript fragments (ASR is a planned input)</li>
-      <li>Locked 22-category lexicon: authority, urgency, secrecy, payment</li>
-      <li>Stage tracker follows the script as it unfolds</li></ul>
-      <span class="tag tg-m">measured on text</span></div>
-    <div class="stg a"><div class="n">3b &middot; VOICE</div><h4>Synthetic-speech stream</h4><ul>
-      <li>wav2vec 2.0 features, early layers pooled</li>
-      <li>Light logistic head, trained on codec- and noise-degraded views</li>
-      <li>Runs on a CPU, no GPU</li></ul>
-      <span class="tag tg-m">measured</span></div>
-    <div class="stg f"><div class="n">4 &middot; DECIDE</div><h4>Fuse, then advise</h4><ul>
-      <li>Disagreement floors: a real voice reading a scam script still warns</li>
-      <li>Belief over five call hypotheses; picks monitor, warn, challenge, escalate or abstain</li>
-      <li>Fail-open runtime, one isolated session per call</li></ul>
-      <span class="tag tg-i">implemented (simulator)</span></div>
+  <p class="reveal" style="max-width:760px;margin:0 0 4px;color:#33414D">Click any block. Each carries an honest status tag: <span class="tag tg-m" style="margin:0">measured</span> has numbers in the public repo, <span class="tag tg-i" style="margin:0">implemented</span> exists in code but is not validated on real calls, <span class="tag tg-p" style="margin:0">planned</span> is designed only.</p>
+    <div class="adg reveal" id="adg">
+    <div class="adg-scroll">
+    <svg viewBox="0 0 1000 610" role="group" aria-label="Interactive architecture diagram of ShieldCall. Select a block to read its details.">
+      <defs>
+        <marker id="m1" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5 0 11z" fill="#060E1E"/></marker>
+        <marker id="m2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5 0 11z" fill="#0A8FAE"/></marker>
+        <marker id="m3" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5 0 11z" fill="#52606D"/></marker>
+        <linearGradient id="gz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F9FC"/><stop offset="1" stop-color="#E9F2F7"/></linearGradient>
+      </defs>
+      <rect x="4" y="4" width="992" height="420" rx="18" fill="url(#gz)" stroke="#C9D1D9"/>
+      <text x="22" y="30" class="zl">LIVE, DURING THE CALL</text>
+      <rect x="4" y="440" width="992" height="166" rx="18" fill="#fff" stroke="#C9D1D9" stroke-dasharray="2 6"/>
+      <text x="22" y="466" class="zl">OFFLINE, BEFORE ANY CALL: HOW THE VOICE MODEL IS BUILT</text>
+
+      <!-- flow arrows -->
+      <path d="M120 205H148" class="ar" marker-end="url(#m1)"/>
+      <path d="M270 190C290 190 288 115 303 115" class="ar" marker-end="url(#m1)"/>
+      <path d="M270 220C290 220 288 295 303 295" class="ar" marker-end="url(#m1)"/>
+      <path d="M577 115C595 115 595 185 608 185" class="ar" marker-end="url(#m1)"/>
+      <path d="M577 295C595 295 595 225 608 225" class="ar" marker-end="url(#m1)"/>
+      <path d="M722 205H748" class="ar" marker-end="url(#m1)"/>
+      <path d="M872 205H898" class="ar" marker-end="url(#m1)"/>
+      <!-- fail-open -->
+      <path d="M67 262V398H946V274" fill="none" stroke="#52606D" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#m3)"/>
+      <rect x="330" y="386" width="340" height="24" rx="12" fill="#fff" stroke="#C9D1D9"/>
+      <text x="500" y="402" class="fo" text-anchor="middle">Fail-open: if the detector is down, the call just continues</text>
+
+      <!-- nodes -->
+      <g class="nd" data-k="call" tabindex="0" role="button" aria-label="Call and consent">
+        <rect x="15" y="140" width="105" height="130" rx="14" fill="#060E1E"/>
+        <text x="67" y="182" class="nt" style="fill:#0BBEE4">LIVE CALL</text>
+        <text x="67" y="206" class="ns" style="fill:#EAF4FA">consent first</text>
+        <text x="67" y="224" class="ns" style="fill:#A9C0D1">phone mic</text>
+        <text x="67" y="240" class="ns" style="fill:#A9C0D1">hears speaker</text>
+      </g>
+      <g class="nd" data-k="front" tabindex="0" role="button" aria-label="Telephone front end">
+        <rect x="150" y="140" width="120" height="130" rx="14" fill="#fff" stroke="#060E1E" stroke-width="2"/>
+        <text x="210" y="176" class="nt">FRONT END</text>
+        <text x="210" y="202" class="ns">8 kHz band</text>
+        <text x="210" y="220" class="ns">voice activity</text>
+        <text x="210" y="238" class="ns">channel simulator</text>
+      </g>
+      <g class="nd l" data-k="lang" tabindex="0" role="button" aria-label="Language stream">
+        <rect x="305" y="42" width="270" height="146" rx="14" fill="#E3F5FA" stroke="#0B6F8C" stroke-width="2"/>
+        <text x="320" y="68" class="nh" style="fill:#0B6F8C">LANGUAGE STREAM</text>
+        <g class="cpl"><rect x="315" y="84" width="80" height="84" rx="9"/><text x="355" y="112">transcript</text><text x="355" y="128">(ASR,</text><text x="355" y="144">planned)</text></g>
+        <g class="cpl"><rect x="401" y="84" width="80" height="84" rx="9"/><text x="441" y="112">22-category</text><text x="441" y="128">scam lexicon</text><text x="441" y="144">(locked)</text></g>
+        <g class="cpl"><rect x="487" y="84" width="80" height="84" rx="9"/><text x="527" y="112">stage</text><text x="527" y="128">tracker</text><text x="527" y="144">of the script</text></g>
+        <path d="M395 126H401M481 126H487" stroke="#0B6F8C" stroke-width="2"/>
+      </g>
+      <g class="nd a" data-k="voice" tabindex="0" role="button" aria-label="Voice stream">
+        <rect x="305" y="222" width="270" height="146" rx="14" fill="#E3F5FA" stroke="#0A8FAE" stroke-width="2"/>
+        <text x="320" y="248" class="nh" style="fill:#0A8FAE">VOICE STREAM</text>
+        <g class="cpl"><rect x="315" y="264" width="80" height="84" rx="9"/><text x="355" y="292">wav2vec 2.0</text><text x="355" y="308">early layers</text><text x="355" y="324">(4 of 12)</text></g>
+        <g class="cpl"><rect x="401" y="264" width="80" height="84" rx="9"/><text x="441" y="292">pooled</text><text x="441" y="308">statistics</text><text x="441" y="324">6,144 values</text></g>
+        <g class="cpl"><rect x="487" y="264" width="80" height="84" rx="9"/><text x="527" y="292">logistic</text><text x="527" y="308">head</text><text x="527" y="324">real or fake</text></g>
+        <path d="M395 306H401M481 306H487" stroke="#0A8FAE" stroke-width="2"/>
+      </g>
+      <g class="nd f" data-k="fusion" tabindex="0" role="button" aria-label="Fusion">
+        <rect x="610" y="140" width="112" height="130" rx="14" fill="#fff" stroke="#060E1E" stroke-width="2.5"/>
+        <text x="666" y="176" class="nt">FUSION</text>
+        <text x="666" y="202" class="ns">disagreement</text>
+        <text x="666" y="220" class="ns">is information</text>
+        <text x="666" y="240" class="ns2">floors + OR rule</text>
+      </g>
+      <g class="nd f" data-k="agent" tabindex="0" role="button" aria-label="Decision agent">
+        <rect x="750" y="140" width="122" height="130" rx="14" fill="#fff" stroke="#060E1E" stroke-width="2.5"/>
+        <text x="811" y="176" class="nt">ADVISER</text>
+        <text x="811" y="202" class="ns">belief over 5</text>
+        <text x="811" y="220" class="ns">call hypotheses</text>
+        <text x="811" y="240" class="ns2">may abstain</text>
+      </g>
+      <g class="nd r" data-k="person" tabindex="0" role="button" aria-label="Output to the person">
+        <rect x="900" y="140" width="92" height="130" rx="14" fill="#FDEEEA" stroke="#D9482B" stroke-width="2.5"/>
+        <text x="946" y="176" class="nt" style="fill:#D9482B">PERSON</text>
+        <text x="946" y="202" class="ns">calm prompt</text>
+        <text x="946" y="220" class="ns">warn, never</text>
+        <text x="946" y="238" class="ns">block</text>
+      </g>
+
+      <!-- offline loop -->
+      <g class="nd b" data-k="build" tabindex="0" role="button" aria-label="Model development method">
+        <rect x="14" y="478" width="972" height="112" rx="14" fill="transparent"/>
+        <g class="cpl2"><rect x="20" y="490" width="148" height="88" rx="10"/><text x="94" y="520" class="pn">1</text><text x="94" y="540">Lock data, splits</text><text x="94" y="556">and seeds first</text></g>
+        <g class="cpl2"><rect x="180" y="490" width="148" height="88" rx="10"/><text x="254" y="520" class="pn">2</text><text x="254" y="540">Phone-channel views:</text><text x="254" y="556">real codecs, noise</text></g>
+        <g class="cpl2"><rect x="340" y="490" width="148" height="88" rx="10"/><text x="414" y="520" class="pn">3</text><text x="414" y="540">Layer ablation:</text><text x="414" y="556">where artifacts live</text></g>
+        <g class="cpl2"><rect x="500" y="490" width="148" height="88" rx="10"/><text x="574" y="520" class="pn">4</text><text x="574" y="540">Small, auditable</text><text x="574" y="556">logistic head</text></g>
+        <g class="cpl2"><rect x="660" y="490" width="148" height="88" rx="10"/><text x="734" y="520" class="pn">5</text><text x="734" y="540">Keep a change only</text><text x="734" y="556">if it beats the last</text></g>
+        <g class="cpl2"><rect x="820" y="490" width="160" height="88" rx="10"/><text x="900" y="520" class="pn">6</text><text x="900" y="540">Check outside:</text><text x="900" y="556">ASVspoof 2019, 5</text></g>
+        <path d="M168 534H180M328 534H340M488 534H500M648 534H660M808 534H820" stroke="#060E1E" stroke-width="2" marker-end="url(#m1)"/>
+      </g>
+      <path d="M540 488V370" fill="none" stroke="#0A8FAE" stroke-width="2.5" marker-end="url(#m2)"/>
+      <rect x="548" y="414" width="96" height="20" rx="10" fill="#fff" stroke="#0A8FAE"/>
+      <text x="596" y="428" class="fo" text-anchor="middle" style="fill:#0A8FAE">trained model</text>
+    </svg>
+    </div>
+    <p class="adg-hint">Select any block, or use the buttons, to see what it does and how far it has been tested.</p>
+    <div class="adg-btns" role="tablist" aria-label="Architecture blocks">
+      <button type="button" data-k="call">Call</button><button type="button" data-k="front">Phone front end</button><button type="button" data-k="lang">Language</button><button type="button" data-k="voice">Voice</button><button type="button" data-k="fusion">Fusion</button><button type="button" data-k="agent">Adviser</button><button type="button" data-k="person">Person</button><button type="button" data-k="build">How it is built</button>
+    </div>
+    <div class="adg-panel" id="adgp" aria-live="polite"></div>
   </div>
-  <p class="note reveal" style="margin-top:6px">Output to the person: a short, calm prompt such as &ldquo;hang up and call the number on your card&rdquo;. A warning means &ldquo;verify&rdquo;, not &ldquo;this is a scammer&rdquo;.</p>
+<p class="note reveal" style="margin-top:6px">Output to the person: a short, calm prompt such as &ldquo;hang up and call the number on your card&rdquo;. A warning means &ldquo;verify&rdquo;, not &ldquo;this is a scammer&rdquo;.</p>
 
   <h3 class="reveal" style="margin:30px 0 4px">How the voice model was developed</h3>
   <p class="reveal" style="max-width:760px;margin:0 0 4px;color:#33414D">The method is the point: a locked protocol, telephone conditions built in, and a rule that an iteration is kept only if it beats the last one on held-out data.</p>
@@ -659,7 +763,6 @@ cd ShieldCallAI
     <label class="f">Anything to add (optional)<textarea id="m" placeholder="Setting, timeline, questions."></textarea></label>
     <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
       <button class="btn primary" type="submit">Declare interest</button>
-      <button class="btn" type="button" id="copy">Copy the note instead</button>
       <span class="status" id="st" role="status"></span>
     </div>
   </form>
@@ -668,7 +771,7 @@ cd ShieldCallAI
 
 <footer>
   <div class="wrap" style="padding:0">
-    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#4c21293e2f29203a392e2d222b3f250c2b212d2520622f2321"><span class="__cf_email__" data-cfemail="79141c0b1a1c150f0c1b18171e0a10391e14181015571a1614">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
+    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#4a272f38292f263c3f282b242d39230a2d272b232664292527"><span class="__cf_email__" data-cfemail="c9a4acbbaaaca5bfbcaba8a7aebaa089aea4a8a0a5e7aaa6a4">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
     <p>Sources for the figures: <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC</a>, <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 report</a>, <a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC</a>.</p>
   </div>
 </footer>
@@ -742,9 +845,6 @@ $('f').addEventListener('submit',function(ev){ev.preventDefault();if(!ok())retur
   .catch(function(){var x=note();$('st').textContent='Could not save online. Opening your email app instead.';location.href='mailto:mercelvubangsi@gmail.com?subject='+encodeURIComponent(x.subject)+'&body='+encodeURIComponent(x.body);})
   .then(function(){btn.disabled=false;});
 });
-$('copy').addEventListener('click',function(){if(!ok())return;var x=note();var txt='To: mercelvubangsi@gmail.com\nSubject: '+x.subject+'\n\n'+x.body;
-  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){$('st').textContent='Copied. Paste it into an email to mercelvubangsi@gmail.com.';},function(){$('st').textContent='Copy failed. Select the fields and email mercelvubangsi@gmail.com directly.';});}
-  else{$('st').textContent='Copy is unavailable here. Email mercelvubangsi@gmail.com directly.';}});
 })();
 </script>
 <script>
@@ -791,6 +891,35 @@ if('IntersectionObserver' in window){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='roadmap'||e.target.querySelector&&e.target.querySelector('#chart'))runCharts();io.unobserve(e.target);}});},{threshold:.12});
   [].forEach.call(document.querySelectorAll('.reveal'),function(el){io.observe(el)});
 }else{[].forEach.call(document.querySelectorAll('.reveal'),function(el){el.classList.add('in')});runCharts();}
+})();
+</script>
+<script>
+(function(){
+var D={
+call:['Live call and consent','implemented','Implemented in the app','The person starts a protected call and consents. The phone microphone hears the other side on speaker. Analysis starts only after consent.','Evidence: app screens in the section below. Not yet used on real calls beyond developer testing.'],
+front:['Telephone front end','implemented','Implemented in the detector','Audio is brought to the 8 kHz phone band, split into frames, and gated by voice-activity detection. For testing, a channel simulator band-limits the audio, applies mu-law compression and drops packets, so the detector is tested on what phones really deliver.','Evidence: public code and unit tests in shieldcall-core.'],
+lang:['Language stream','measured','Measured on text only','Reads transcript fragments for scam tactics: authority, urgency, secrecy, payment demands. A locked 22-category lexicon does the scoring, and a stage tracker follows how a script unfolds. Speech-to-text is a planned input; experiments inject text.','Evidence: on independent scripts a wide locked lexicon scored AUC about 0.84 against about 0.55 for narrow keywords. The stage model did not beat the wide lexicon, so it is kept as a baseline.'],
+voice:['Voice stream','measured','Measured on public benchmarks','Looks for artifacts of cloned or synthetic speech. Features come from the early layers of a self-supervised speech model (wav2vec 2.0), pooled into 6,144 statistics per clip, scored by a small logistic head trained on codec- and noise-degraded views.','Evidence: 10.05% equal error rate on a sample of the official ASVspoof 2019 protocol, 14.4% on our locked test subset, 22.63% on an ASVspoof 5 sample with codecs. Baseline level on studio audio, not proven on real calls.'],
+fusion:['Fusion by disagreement','implemented','Implemented, tested on constructed cases','Language and voice scores are combined so that disagreement raises attention instead of cancelling out: a real voice reading a scam script still warns, and a synthetic voice with mild wording still warns. Floors and a calibrated OR rule do this.','Evidence: on 40 constructed cells the rule caught the complementary cases a naive sum missed (recall 1.00 against 0.30). The cost to watch is false alerts on safe calls. Not yet tested on real call streams.'],
+agent:['Adviser with abstention','implemented','Implemented, simulator only','Keeps a belief over five call hypotheses and picks the most informative next step: monitor, warn, challenge, escalate, adapt, or abstain when unsure. It recommends; it never blocks the call.','Evidence: in simulation, social-engineering traces lead to a warning. With real sensor scores on four test calls it still spent the challenge on genuine calls, so it is not yet reliable.'],
+person:['What the person sees','planned','Designed, not tested with people','A short, calm prompt such as "hang up and call the number on your card". A warning means verify, not "this is a scammer". If the detector fails, the call simply continues.','Evidence: none yet. Warning wording, comprehension and false-alert burden need a consented lab study.'],
+build:['How the voice model is built','measured','Method in use, results published','Six steps: lock data, splits and seeds before modeling; build phone-channel views with real codecs and noise; run a layer ablation to see where artifacts live; fit a small auditable head; keep a change only if it beats the last on held-out data (the locked test is scored once); then check on outside data.','Evidence: four recipes tried, one rejected after failing the locked test. Every step and number is in the public repository. Each building block is a published technique; the contribution is the assembly for phone conditions and the discipline.']
+};
+var TAG={measured:'tg-m',implemented:'tg-i',planned:'tg-p'};
+var root=document.getElementById('adg');if(!root)return;
+var panel=document.getElementById('adgp');
+function show(k){
+  var d=D[k];if(!d)return;
+  root.querySelectorAll('.nd').forEach(function(n){n.classList.toggle('sel',n.getAttribute('data-k')===k)});
+  root.querySelectorAll('.adg-btns button').forEach(function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k?'true':'false')});
+  panel.innerHTML='<h4>'+d[0]+' <span class="atag '+TAG[d[1]]+'">'+d[2]+'</span></h4><p>'+d[3]+'</p><div class="ev">'+d[4]+'</div>';
+}
+root.querySelectorAll('.nd').forEach(function(n){
+  n.addEventListener('click',function(){show(n.getAttribute('data-k'))});
+  n.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();show(n.getAttribute('data-k'))}});
+});
+root.querySelectorAll('.adg-btns button').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-k'))})});
+show('voice');
 })();
 </script>
 </body>
