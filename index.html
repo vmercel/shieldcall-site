@@ -220,39 +220,30 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 .no-js .reveal{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.stg.now .dot{animation:none}}
 </style>
-<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<a class="skip-link" href="#top">Skip to content</a>
-<div class="reading-progress" aria-hidden="true"></div>
 <div class="wrap">
 <header class="top">
   <a class="brand" href="#top"><img src="assets/shieldcall-icon-96.png" alt="" width="34" height="34">ShieldCall</a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu <span aria-hidden="true">☰</span></button>
-  <nav id="site-nav" aria-label="Main navigation"><a href="#how">How it works</a><a href="#app">The app</a><a href="#roadmap">Research</a><a href="#download">Developers</a><a class="nav-cta" href="#interest">Get involved ↗</a></nav>
+  <nav><a href="#problem" class="hide-s">Problem</a><a href="#how" class="hide-s">Solution</a><a href="#app" class="hide-s">App</a><a href="#roadmap" class="hide-s">Roadmap</a><a href="#beta">iPhone beta</a><a href="#download" class="hide-s">Code</a><a href="#interest">Declare interest</a></nav>
 </header>
 
 <main id="top">
 <div class="hero">
-  <div class="hero-copy">
-    <div class="eyebrow"><span class="live-dot"></span> OPEN RESEARCH. HUMAN CONTROL.</div>
-    <h1>A familiar voice.<br>An unfamiliar risk.<br><em>A moment to verify.</em></h1>
-    <p class="lede">A voice can sound real. The request can still be a scam. ShieldCall brings language and voice signals together to explore a timely warning, while the conversation is still happening.</p>
-    <div class="cta"><a class="btn cyan" href="#experience">Explore the demo <span aria-hidden="true">↗</span></a><a class="btn" href="#beta">Join the iPhone beta</a></div>
-    <div class="hero-proof"><span>01 / Language signals</span><span>02 / Voice signals</span><span>03 / You decide</span></div>
-    <p class="note">Open-source research prototype. Real-call effectiveness remains unproven. <a href="#status">See the current evidence →</a></p>
+  <div>
+    <div class="eyebrow">Open research prototype &middot; Apache-2.0</div>
+    <h1>Warn people <em>during</em> the call. Never drop it.</h1>
+    <p class="lede">ShieldCall is research on detecting two things that caller ID cannot: a scam script, and a voice that is cloned or synthetic. It listens with consent, scores the language and the audio separately, and warns the person to verify. If it fails, the call goes on.</p>
+    <div class="cta">
+      <a class="btn cyan" href="#beta">Get the iPhone beta</a>
+      <a class="btn primary" href="#interest">Declare interest</a>
+      <a class="btn" href="#download">Get the code</a>
+      <a class="btn" href="https://github.com/vmercel/shieldcall-core" rel="noopener">Star on GitHub</a>
+    </div>
+    <div class="trust"><span class="chip"><i></i>Open source &middot; Apache-2.0</span><span class="chip"><i class="blue"></i>Measured baseline published</span><span class="chip"><i class="amber"></i>iPhone beta in Apple review</span></div>
+    <p class="note" style="margin-top:12px">Research prototype. Not a certified product, not deployed, and not proven on real calls. <a href="#status">What is and is not done.</a></p>
   </div>
-  <div class="hero-visual">
-    <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-    <span class="visual-label">DESIGNED FOR THE MOMENT THAT MATTERS</span>
-    <div class="hero-phone"><img src="assets/app/live-protect.webp" alt="ShieldCall Live Protect prototype, showing the listening interface before any speech is scored" width="540" height="1170" fetchpriority="high"></div>
-    <div class="signal-float signal-a"><span class="live-dot"></span> Two signals. One clearer picture.</div>
-    <div class="signal-float signal-b"><span aria-hidden="true">↗</span><div><b>A prompt to pause.</b><small>Verify on a number you trust.</small></div></div>
-    <p class="visual-caption">Actual prototype interface · listening state</p>
-  </div>
-</div>
-<div class="project-strip"><span>BUILT IN THE OPEN</span><a href="https://github.com/vmercel/shieldcall-core">Apache-2.0 source ↗</a><a href="#roadmap">Reproducible benchmarks ↗</a><a href="#how">Consent-first design ↗</a><a href="#status">Transparent progress ↗</a></div>
-<section id="experience"><div class="sec-head"><div class="eyebrow">01 / EXPERIENCE THE IDEA</div><h2>Same call. Two different clues.</h2><p>Choose a scenario and watch how the signals diverge. Then take the detector offline: the call continues. This is an interactive explanation, with illustrative scores, not a working fraud detector.</p></div>
+
   <div>
     <div class="sim" id="sim" aria-label="Interactive illustration of the two-stream detector">
       <div class="sim-head">
@@ -279,21 +270,26 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
     </div>
     <p class="caption">Scripted illustration of the design, not measured results. Scores are made up to show the logic: the dashed line is the warning threshold, and either stream can trigger a warning, so a natural voice reading a hostile script is not missed.</p>
   </div>
-</section>
+</div>
 
 <section id="problem">
   <div class="sec-head reveal">
     <div class="eyebrow">The problem</div>
-    <h2>Trust is the attack surface.</h2>
+    <h2>The call is where the damage starts</h2>
     <p>Caller-ID checks tell you whether a number was attested. They say nothing about what is being said, or whether the voice is real. With cheap voice cloning, a scammer can sound like an official, a bank, or a grandchild. By the time the call ends, the money has often moved.</p>
   </div>
   <div class="anat reveal" aria-label="Anatomy of an impersonation call">
     <div class="st"><svg viewBox="0 0 48 48" fill="none" stroke="#0B6F8C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="4" width="20" height="40" rx="5"/><path d="M21 38h6"/><circle cx="24" cy="18" r="4"/><path d="M17 30c1-4 4-6 7-6s6 2 7 6"/></svg><b>A trusted voice</b><p>An official, a bank, a relative. Increasingly cloned or synthetic.</p></div>
     <div class="st"><svg viewBox="0 0 48 48" fill="none" stroke="#0B6F8C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10h36v22H22l-8 8v-8H6z"/><path d="M14 18h20M14 24h12"/></svg><b>A believable script</b><p>Authority, then urgency, then secrecy: &ldquo;do not tell anyone&rdquo;.</p></div>
     <div class="st"><svg viewBox="0 0 48 48" fill="none" stroke="#D9482B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l18 32H6z"/><path d="M24 20v9M24 34v1"/></svg><b>A payment demand</b><p>Gift cards, wire, crypto, or a &ldquo;safe account&rdquo;. Paid before anyone checks.</p></div>
-    <div class="st gap"><svg viewBox="0 0 48 48" fill="none" stroke="#D9482B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M12 36L36 12"/></svg><b>The gap</b><p>A familiar voice and a trusted-looking number can distract from the request itself. A timely prompt could create space to verify.</p></div>
+    <div class="st gap"><svg viewBox="0 0 48 48" fill="none" stroke="#D9482B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M12 36L36 12"/></svg><b>The gap</b><p>No tool is listening to the conversation itself, so nobody warns the person <em>during</em> the call.</p></div>
   </div>
-  <div class="threat-band"><span>THE RESEARCH QUESTION</span><p>Can complementary signals help someone pause <em>before</em> acting on a fraudulent request?</p><a href="#how">Explore the approach ↓</a></div>
+  <div class="statrow reveal">
+    <div class="statcard"><div class="n">$3.5B</div><p>reported lost to imposter scams in 2025, the most reported fraud category</p><div class="src"><a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC press release, 15 June 2026</a></div></div>
+    <div class="statcard"><div class="n">$20.9B</div><p>total reported cybercrime losses in 2025, with 22,364 complaints that mention AI</p><div class="src"><a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 Internet Crime Report</a></div></div>
+    <div class="statcard"><div class="n">Feb 2024</div><p>FCC ruled that AI-generated voices in robocalls are &ldquo;artificial&rdquo; under the TCPA</p><div class="src"><a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC, 8 Feb 2024</a></div></div>
+  </div>
+  <p class="note" style="margin-top:14px">These are reported losses, not total cost. They describe the problem, not what ShieldCall has achieved. ShieldCall has not prevented any of it.</p>
 </section>
 <section id="how">
   <div class="sec-head reveal">
@@ -345,7 +341,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 <section id="app">
   <div class="sec-head reveal">
     <div class="eyebrow">The app</div>
-    <h2>From first consent to a live verdict.</h2>
+    <h2>What the phone client looks like today</h2>
     <p>ShieldCall AI is an iPhone and web client built with Expo and React Native. It is a research prototype: these are screens from the current source, shown as rendered in a browser at iPhone size, with no calls analyzed yet.</p>
   </div>
   <div class="shots reveal">
@@ -357,7 +353,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
       <figure><div class="phone"><img src="assets/app/settings.webp" alt="Settings screen" loading="lazy" width="270" height="585"></div><figcaption><b>Settings</b>Microphone permission, privacy policy and terms in one place.</figcaption></figure>
     </div>
     <p class="note" style="text-align:center">Rendered from the app source on 8 Nov 2026. The iPhone build (1.0.0, build 24) is uploaded to App Store Connect and in Apple beta review.</p>
-    <p style="text-align:center;margin:14px 0 0"><a class="btn cyan" href="#beta">Join the iPhone beta</a> <a class="btn" style="color:#fff;border-color:#4a6683" href="#download">Get the code</a></p>
+    <p style="text-align:center;margin:14px 0 0"><a class="btn cyan" href="#beta">Get the iPhone beta</a> <a class="btn" style="color:#fff;border-color:#4a6683" href="#download">Get the code</a></p>
   </div>
 </section>
 <section id="roadmap">
@@ -400,10 +396,11 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
             <div class="cr"><span>ShieldCall recipe</span><div class="bar2"><i style="--w:25.125%"></i></div><b>10.05%</b></div>
             <div class="cr"><span>LFCC-GMM*</span><div class="bar2"><i class="ref" style="--w:20.225%"></i></div><b>8.09%</b></div>
             <div class="cr"><span>CQCC-GMM*</span><div class="bar2"><i class="ref" style="--w:23.925%"></i></div><b>9.57%</b></div>
+            <div class="cr"><span>ASVspoof 5 sample</span><div class="bar2"><i class="hi" style="--w:56.6%"></i></div><b>22.63%</b></div>
           </div>
-          <p class="note">Official ASVspoof 2019 LA evaluation protocol, random sample of 6,000 trials (95% interval 8.8 to 11.6). *Organizers&rsquo; published baselines on the full list. We are at baseline level, not better. The audio is anechoic studio speech, so this does not describe real phone calls.</p>
-          <ul class="tick"><li class="ok">Four recipes tried; one rejected after it failed on the locked test</li><li class="part">Prototype app built; iPhone build in Apple beta review</li><li class="todo">Next: ASVspoof 5 (adds codec conditions), harder validation, multiple seeds</li></ul>
-          <div class="links"><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE5_OFFICIAL_PROTOCOL.md" rel="noopener">Official-protocol report</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE3_ITERATIONS.md" rel="noopener">Phase 3 log</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE4_ITERATIONS.md" rel="noopener">Phase 4 log (a failed result)</a></div>
+          <p class="note">Official ASVspoof 2019 LA evaluation protocol, random sample of 6,000 trials (95% interval 8.8 to 11.6). *Organizers&rsquo; published baselines on the full list. We are at baseline level, not better. The audio is anechoic studio speech, so this does not describe real phone calls. On a 6,240-clip sample of ASVspoof 5, which has realistic source audio and 11 codec conditions, the same recipe scores 22.63% (95% interval 21.6 to 23.8; 16.9% with no codec, up to 28.6% for the worst codec). That is not comparable to the organizers&rsquo; baselines, which were trained on ASVspoof 5 data.</p>
+          <ul class="tick"><li class="ok">Four recipes tried; one rejected after it failed on the locked test. Errors double on ASVspoof 5</li><li class="part">Prototype app built; iPhone build in Apple beta review</li><li class="todo">Next: harder validation, training on ASVspoof 5 data, minDCF, multiple seeds</li></ul>
+          <div class="links"><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE5_OFFICIAL_PROTOCOL.md" rel="noopener">Official-protocol report</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE6_ASVSPOOF5.md" rel="noopener">ASVspoof 5 report</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE3_ITERATIONS.md" rel="noopener">Phase 3 log</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE4_ITERATIONS.md" rel="noopener">Phase 4 log (a failed result)</a></div>
         </div>
         <div>
           <h4 style="margin:0 0 4px;font-size:15px">The app, today</h4>
@@ -428,7 +425,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
       <span class="badge next">Next</span>
       <h3>3. Integration</h3>
       <p>Move from scored clips to a live call on one supported channel, with an explicit failure mode when quality is poor.</p>
-      <ul class="tick"><li class="todo">Live speech recognition on one user-controlled VoIP or contact-center channel</li><li class="todo">Latency budget and abstention rules when transcripts or audio are poor</li><li class="todo">Evaluation on ASVspoof 5 and on consented lab recordings</li></ul>
+      <ul class="tick"><li class="todo">Live speech recognition on one user-controlled VoIP or contact-center channel</li><li class="todo">Latency budget and abstention rules when transcripts or audio are poor</li><li class="todo">Training and evaluation on ASVspoof 5 data (a first cross-corpus run is done) and on consented lab recordings</li></ul>
       <p class="note">Not started. It depends on a channel with lawful access to call audio. First targets are not native cellular calls.</p>
     </div>
     <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4">
@@ -442,7 +439,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
       <h3>5. Consented pilot</h3>
       <p>With a willing partner: warning latency, user comprehension, false-alert burden and reliability, in a published report that states its limits.</p>
       <ul class="tick"><li class="todo">A partner willing to run a lab or consented pilot (none yet)</li><li class="todo">Pre-registered measures and a public report</li></ul>
-      <p><a class="btn sm" href="#interest">Get involved as a partner or reviewer</a></p>
+      <p><a class="btn sm" href="#interest">Declare interest as a partner or reviewer</a></p>
     </div>
   </div>
 </section>
@@ -455,7 +452,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
     <tr><th style="width:50%">Built and public</th><th>Not done</th></tr>
     <tr><td><span class="yes">Yes</span> Detector with dual-stream scoring, fusion rules and a fail-open sidecar runtime</td><td><span class="no">No</span> Validation on real phone calls</td></tr>
     <tr><td><span class="yes">Yes</span> Locked benchmark with telephone conditions, scripts and data card</td><td><span class="no">No</span> Results better than published baselines on the official protocol</td></tr>
-    <tr><td><span class="yes">Yes</span> Measured baseline on the official ASVspoof 2019 LA protocol sample (10.05% EER)</td><td><span class="no">No</span> ASVspoof 5, minimum t-DCF, multi-seed runs</td></tr>
+    <tr><td><span class="yes">Yes</span> Measured baselines: official ASVspoof 2019 LA sample (10.05% EER) and ASVspoof 5 sample (22.63% EER)</td><td><span class="no">No</span> minDCF or min t-DCF, multi-seed runs, training on ASVspoof 5</td></tr>
     <tr><td><span class="yes">Yes</span> React Native phone client with consent screens; iPhone build in Apple beta review</td><td><span class="no">No</span> App Store release, carrier trial, paid users or certification</td></tr>
     <tr><td><span class="yes">Yes</span> Apache-2.0 license, CI on all repositories, open issue tracker</td><td><span class="no">No</span> Filed patent or deployment</td></tr>
   </table>
@@ -468,17 +465,17 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
     <div>
       <div class="eyebrow" style="color:#7FDDF2">iPhone beta &middot; TestFlight &middot; free</div>
       <h2>Try the ShieldCall app on your iPhone</h2>
-      <p>Request an invitation to the research build below. Access depends on beta availability. It needs iOS and Apple's free TestFlight app. It is a prototype: it scores scam language on this phone while a call is on speaker, warns you, and never hangs up. Expect rough edges, and please tell me about false alarms and misses.</p>
+      <p>Register below and you will get the TestFlight link for the research build. It needs iOS and Apple's free TestFlight app. It is a prototype: it scores scam language on this phone while a call is on speaker, warns you, and never hangs up. Expect rough edges, and please tell me about false alarms and misses.</p>
       <form id="bf" novalidate>
         <div class="row2">
           <label>Your name<input id="bn" autocomplete="name" required></label>
           <label>Your email (to send you updates)<input id="be" type="email" autocomplete="email" required></label>
         </div>
         <label style="display:flex;gap:8px;align-items:flex-start;font-size:14px"><input id="bc" type="checkbox" style="width:auto;margin-top:4px"> I understand this is a research prototype, not a certified fraud-protection product, and I will only analyze calls I have the legal right to analyze.</label>
-        <p style="margin-top:14px"><button class="btn cyan" type="submit" id="bb">Request beta access</button> <span class="status" id="bs" role="status"></span></p>
+        <p style="margin-top:14px"><button class="btn cyan" type="submit" id="bb">Register and get the TestFlight link</button> <span class="status" id="bs" role="status"></span></p>
       </form>
       <div id="betaDone"><strong>You are registered.</strong> <span id="betaMsg"></span> <a class="btn cyan" id="tfLink" href="#" rel="noopener" style="display:none;margin-top:10px">Open in TestFlight</a></div>
-      <p class="note">The beta is awaiting Apple review; there is no public join link on this page. Your email is saved to a private database that only the researcher can read. Never sold or shared.</p>
+      <p class="note">Apple review of the beta is in progress, so the join link may take a few days to open. Your email is saved to a private database that only the researcher can read. Never sold or shared.</p>
     </div>
   </div>
 </section>
@@ -510,18 +507,10 @@ cd ShieldCallAI
   <p class="note" style="margin-top:14px">Apache-2.0, provided without warranty. Research use only. It is not a certified fraud-prevention service. Issues, test results and critique are welcome on GitHub.</p>
 </section>
 
-<section id="collaborate"><div class="sec-head"><div class="eyebrow">THE NEXT CHAPTER</div><h2>A better warning needs more perspectives.</h2><p>Help move the work from a reproducible prototype toward independent evaluation and carefully consented real-world study.</p></div><div class="collab-grid"><article><span>01 / DEVELOPERS</span><h3>Build with the source.</h3><p>Review the engine, improve the client, report a bug, or propose an integration.</p><a href="#download">Explore the repositories ↗</a></article><article><span>02 / RESEARCHERS</span><h3>Challenge the evidence.</h3><p>Reproduce the baselines, investigate noisy channels, and test where the approach breaks.</p><a href="https://github.com/vmercel/shieldcall-core/issues">Start a technical discussion ↗</a></article><article><span>03 / PRACTITIONERS</span><h3>Shape a useful pilot.</h3><p>Bring consumer-protection, accessibility, or contact-center experience to the research design.</p><a href="#interest">Discuss a collaboration ↗</a></article></div></section>
-<section id="faq"><div class="sec-head"><div class="eyebrow">GOOD QUESTIONS</div><h2>Know exactly what you’re exploring.</h2></div>
-<details><summary>Can ShieldCall listen to any call on my iPhone?</summary><p>No. The current Live Protect approach uses this phone’s microphone while another phone is on speaker. It does not access native cellular call audio. The detector can also be explored through its developer sidecar.</p></details>
-<details><summary>Does a warning mean the caller is a scammer?</summary><p>No. Voice and language scores can be wrong. A warning is a prompt to verify independently, for example by calling an organization or relative back on a number you already know.</p></details>
-<details><summary>Has this been proven to prevent phone fraud?</summary><p>No. Published benchmark results measure specific laboratory tasks. There is no completed real-call validation, carrier deployment, or user study establishing fraud prevention.</p></details>
-<details><summary>What happens when the detector is unavailable?</summary><p>The sidecar is designed to fail open: it does not sit in the telephone media path or disconnect the call. Try the offline switch in the illustration to see this principle.</p></details>
-<details><summary>What does the benchmark percentage mean?</summary><p>Equal error rate (EER) is the point where false acceptance and false rejection rates match. Lower is better. The reported 10.05% is from 6,000 sampled ASVspoof 2019 LA evaluation trials, not a real-call fraud accuracy score. Sample size, audio conditions, and protocol matter.</p></details>
-<details><summary>Can I use or contribute to the code?</summary><p>The detector and companion app are published under Apache-2.0. Follow each repository’s setup instructions and license terms. Contributions, independent tests, and issues are welcome.</p></details></section>
 <section id="interest">
-  <div class="eyebrow">Get involved</div>
+  <div class="eyebrow">Declare interest</div>
   <h2>Tell me you are interested</h2>
-  <p style="max-width:680px">If you work on telephone fraud, speech anti-spoofing, consumer protection or contact-center operations, a short note helps. A letter of interest is non-binding: it commits you or your organization to nothing beyond what it says. Choose how you would like to contribute and send a note directly to the project. You can also copy it to send by email.</p>
+  <p style="max-width:680px">If you work on telephone fraud, speech anti-spoofing, consumer protection or contact-center operations, a short note helps. A letter of interest is non-binding: it commits you or your organization to nothing beyond what it says. Tick what fits, press the button, and your email app opens with the note ready to send. Review it before you send.</p>
   <form id="f" novalidate>
     <div class="row2">
       <label class="f">Your name<input id="n" autocomplete="name" required></label>
@@ -539,9 +528,9 @@ cd ShieldCallAI
         <label><input type="checkbox" name="t" value="giving technical feedback or review"> Technical feedback</label>
       </div>
     </fieldset>
-    <label class="f">Anything to add (optional)<textarea id="m" placeholder="Your use case, questions, or the contribution you have in mind."></textarea></label>
+    <label class="f">Anything to add (optional)<textarea id="m" placeholder="Setting, timeline, questions."></textarea></label>
     <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-      <button class="btn primary" type="submit">Get involved</button>
+      <button class="btn primary" type="submit">Declare interest</button>
       <button class="btn" type="button" id="copy">Copy the note instead</button>
       <span class="status" id="st" role="status"></span>
     </div>
@@ -552,13 +541,13 @@ cd ShieldCallAI
 
 <footer>
   <div class="wrap" style="padding:0">
-    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="mailto:mercelvubangsi@gmail.com">mercelvubangsi@gmail.com</a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
-    <p>Independent research. Open source. Built for scrutiny. <a href="#top">Back to top ↑</a></p>
+    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#5b363e29383e372d2e393a353c28321b3c363a323775383436"><span class="__cf_email__" data-cfemail="a4c9c1d6c7c1c8d2d1c6c5cac3d7cde4c3c9c5cdc88ac7cbc9">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
+    <p>Sources for the figures: <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC</a>, <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 report</a>, <a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC</a>.</p>
   </div>
 </footer>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
 var S={
  a:[["Caller","Hello, this is Officer Grant from the Social Security Administration.",.35,.08],
@@ -677,6 +666,5 @@ if('IntersectionObserver' in window){
 }else{[].forEach.call(document.querySelectorAll('.reveal'),function(el){el.classList.add('in')});runCharts();}
 })();
 </script>
-<script src="assets/site.js" defer></script>
 </body>
 </html>
