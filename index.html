@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ShieldCall: open research on AI voice-impersonation and phone-fraud warnings</title>
-<meta name="description" content="ShieldCall is an open-source research prototype that warns people during a phone call when the language or the voice suggests fraud. Read how it works, download the code, and declare interest in a pilot or review.">
+<meta name="description" content="ShieldCall is an open-source research prototype that warns people during a phone call when the language or the voice suggests fraud. Read how it works, see the code on GitHub, and declare interest in a pilot or review.">
 <meta property="og:title" content="ShieldCall: warn during the call, never drop it">
-<meta property="og:description" content="Open research on detecting AI-enabled voice impersonation and phone scams. Download the prototype or declare interest.">
+<meta property="og:description" content="Open research on detecting AI-enabled voice impersonation and phone scams. See the code on GitHub or declare interest.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/og-card.png">
 <meta name="theme-color" content="#060E1E">
@@ -237,7 +237,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
     <div class="cta">
       <a class="btn cyan" href="#beta">Get the iPhone beta</a>
       <a class="btn primary" href="#interest">Declare interest</a>
-      <a class="btn" href="#download">Get the code</a>
+      <a class="btn" href="#download">Code on GitHub</a>
       <a class="btn" href="https://github.com/vmercel/shieldcall-core" rel="noopener">Star on GitHub</a>
     </div>
     <div class="trust"><span class="chip"><i></i>Open source &middot; Apache-2.0</span><span class="chip"><i class="blue"></i>Measured baseline published</span><span class="chip"><i class="amber"></i>iPhone beta in Apple review</span></div>
@@ -353,7 +353,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
       <figure><div class="phone"><img src="assets/app/settings.webp" alt="Settings screen" loading="lazy" width="270" height="585"></div><figcaption><b>Settings</b>Microphone permission, privacy policy and terms in one place.</figcaption></figure>
     </div>
     <p class="note" style="text-align:center">Rendered from the app source on 8 Nov 2026. The iPhone build (1.0.0, build 24) is uploaded to App Store Connect and in Apple beta review.</p>
-    <p style="text-align:center;margin:14px 0 0"><a class="btn cyan" href="#beta">Get the iPhone beta</a> <a class="btn" style="color:#fff;border-color:#4a6683" href="#download">Get the code</a></p>
+    <p style="text-align:center;margin:14px 0 0"><a class="btn cyan" href="#beta">Get the iPhone beta</a> <a class="btn" style="color:#fff;border-color:#4a6683" href="#download">Code on GitHub</a></p>
   </div>
 </section>
 <section id="roadmap">
@@ -409,12 +409,10 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
             <div class="phone"><img src="assets/app/onboarding.webp" alt="Onboarding screen" loading="lazy" width="270" height="585"></div>
             <div class="phone"><img src="assets/app/settings.webp" alt="Settings screen" loading="lazy" width="270" height="585"></div>
           </div>
-          <h4 style="margin:6px 0 4px;font-size:15px">Download</h4>
+          <h4 style="margin:6px 0 4px;font-size:15px">Code on GitHub</h4>
           <div class="dlrow">
-            <a class="btn cyan sm" href="#beta">iPhone beta (TestFlight)</a>
-            <a class="btn primary sm" href="https://github.com/vmercel/ShieldCallAI/archive/refs/heads/main.zip" rel="noopener">App source ZIP</a>
-            <a class="btn primary sm" href="https://github.com/vmercel/shieldcall-core/archive/refs/heads/main.zip" rel="noopener">Detector ZIP</a>
-            <a class="btn sm" href="https://github.com/vmercel/shieldcall-core" rel="noopener">Star on GitHub</a>
+            <a class="btn primary sm" href="https://github.com/vmercel/ShieldCallAI" rel="noopener">App on GitHub</a>
+            <a class="btn primary sm" href="https://github.com/vmercel/shieldcall-core" rel="noopener">Detector on GitHub</a>
           </div>
           <div class="callout"><b>iPhone beta status:</b> build 1.0.0 (24) is uploaded and waiting for Apple&rsquo;s beta review. Register in the beta section below and the TestFlight link will be shown here as soon as Apple approves it. Not on the App Store.</div>
         </div>
@@ -481,14 +479,14 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 </section>
 
 <section id="download">
-  <div class="eyebrow">Download</div>
-  <h2>Get the source code</h2>
+  <div class="eyebrow">Code</div>
+  <h2>Source code on GitHub</h2>
   <div class="dl">
     <div class="card">
       <span class="pill">Detector</span><span class="pill">Python</span>
       <h3 style="margin-top:12px">shieldcall-core</h3>
       <p>Streaming dual-stream detector, experiments, tests and paper.</p>
-      <p><a class="btn primary" href="https://github.com/vmercel/shieldcall-core/archive/refs/heads/main.zip" rel="noopener">Download ZIP</a> <a class="btn" href="https://github.com/vmercel/shieldcall-core" rel="noopener">View on GitHub</a></p>
+      <p><a class="btn" href="https://github.com/vmercel/shieldcall-core" rel="noopener">View on GitHub</a></p>
 <pre>git clone https://github.com/vmercel/shieldcall-core
 cd shieldcall-core
 pip install -r requirements-serve.txt
@@ -498,7 +496,7 @@ python scripts/run_sidecar.py</pre>
       <span class="pill">App</span><span class="pill">React Native</span>
       <h3 style="margin-top:12px">ShieldCallAI</h3>
       <p>Phone client with consented call sessions, a live-analysis view and the detector client.</p>
-      <p><a class="btn primary" href="https://github.com/vmercel/ShieldCallAI/archive/refs/heads/main.zip" rel="noopener">Download ZIP</a> <a class="btn" href="https://github.com/vmercel/ShieldCallAI" rel="noopener">View on GitHub</a></p>
+      <p><a class="btn" href="https://github.com/vmercel/ShieldCallAI" rel="noopener">View on GitHub</a></p>
 <pre>git clone https://github.com/vmercel/ShieldCallAI
 cd ShieldCallAI
 # see README for setup</pre>
@@ -541,7 +539,7 @@ cd ShieldCallAI
 
 <footer>
   <div class="wrap" style="padding:0">
-    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#5b363e29383e372d2e393a353c28321b3c363a323775383436"><span class="__cf_email__" data-cfemail="a4c9c1d6c7c1c8d2d1c6c5cac3d7cde4c3c9c5cdc88ac7cbc9">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
+    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#54393126373138222136353a33273d143339353d387a373b39"><span class="__cf_email__" data-cfemail="224f475041474e545740434c45514b62454f434b4e0c414d4f">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
     <p>Sources for the figures: <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC</a>, <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 report</a>, <a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC</a>.</p>
   </div>
 </footer>
