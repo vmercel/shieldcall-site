@@ -292,6 +292,31 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 .rowic{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px}
 .rowic li{display:flex;gap:10px;align-items:center;font-size:15px}
 .rowic svg{flex:none;width:22px;height:22px}
+
+/* hero restored from the committed version (scoped palette so the rest of the page keeps its theme) */
+.hero,.project-strip{--hbrand:#9af2cb;--hac:#08745e;--hnavy:#081d28;--hmute:#596c71;--hline:#dbe5e2}
+.hero{grid-template-columns:1.13fr 1fr;gap:22px;padding:80px 0 65px;align-items:center}
+.hero>div{min-width:0}
+.hero .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--hac);margin-bottom:14px}
+.hero h1{font-size:clamp(45px,5.2vw,68px);line-height:1.06;margin:22px 0;letter-spacing:-.065em;font-weight:600}.hero h1 em{font-style:normal;color:var(--hac)}
+.hero .lede{font-size:18px;line-height:1.75;max-width:560px;color:var(--hmute)}
+.hero .btn{border-radius:10px;border:1px solid var(--hline);font-size:14px;min-height:48px;padding:12px 19px}
+.hero .btn.cyan{background:var(--hbrand);border-color:var(--hbrand);color:var(--hnavy)}.hero .btn.cyan:hover{background:#7be4b7}
+.hero-proof{display:flex;gap:18px;flex-wrap:wrap;font:600 10px var(--mono);margin:28px 0 18px;color:var(--hac)}
+.hero .note{max-width:460px;font-size:12px}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#13bb8c;margin-right:6px;box-shadow:0 0 0 4px #13bb8c12}
+.hero-visual{position:relative;min-height:590px;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 45%,#164b4c,#081d28 72%);border-radius:30px;overflow:hidden}
+.hero-phone{width:225px;height:486px;border:5px solid #305459;border-radius:33px;overflow:hidden;box-shadow:0 35px 65px #0007;transform:rotate(-5deg);z-index:2;background:#050f1d}.hero-phone img{width:100%;height:auto;display:block}
+.orbit{position:absolute;width:420px;height:420px;border:1px solid #9af2cb25;border-radius:50%;transform:rotate(-25deg) scaleX(1.3)}.orbit-two{width:320px;height:320px;border-style:dashed;transform:rotate(35deg) scaleX(1.5)}
+.visual-label{position:absolute;top:24px;color:#b9d1cc;font:9px var(--mono);letter-spacing:.13em}
+.signal-float{position:absolute;z-index:3;background:#ecfff4;color:#122f31;box-shadow:0 14px 32px #0002;border:1px solid #d6f5e5;border-radius:12px;padding:12px 15px;font-size:11px}
+.signal-a{left:15px;top:180px}.signal-b{bottom:100px;right:14px;display:flex;gap:12px;align-items:center}.signal-b>span{font-size:25px;color:var(--hac)}.signal-b small{display:block;color:var(--hmute);font-size:10px}
+.visual-caption{position:absolute;bottom:16px;margin:0;color:#9dbeb9;font-size:10px}
+.project-strip{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0;border-top:1px solid var(--hline);border-bottom:1px solid var(--hline);font-size:12px}
+.project-strip>span{font:10px var(--mono);color:var(--hmute);letter-spacing:.1em}.project-strip a{text-decoration:none;font-weight:600}
+@media(max-width:1000px){.hero{gap:25px}.hero-visual{min-height:550px}.hero h1{font-size:52px}.signal-a{top:150px;left:8px;font-size:9px}.signal-b{right:8px}.project-strip{flex-wrap:wrap;justify-content:center}.project-strip>span{width:100%;text-align:center}}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:50px 0 35px;gap:30px}.hero h1{font-size:clamp(40px,9vw,64px)}.hero .lede{font-size:17px}.hero-visual{min-height:545px;max-width:540px;width:100%;justify-self:center}.hero-phone{width:218px;height:472px}.signal-a{left:12px;top:160px;font-size:10px}.hero-proof{font-size:9px;gap:14px}.project-strip{gap:12px 22px;font-size:11px}.hero .cta .btn{font-size:12px;padding:12px 16px}}
+@media(min-width:761px) and (max-width:900px){.hero{grid-template-columns:1fr}.hero h1{font-size:64px}.hero-visual{width:100%;max-width:600px;justify-self:center}.hero .lede{max-width:650px}.hero .cta{flex-wrap:nowrap}}
 </style>
 </head>
 <body>
@@ -303,19 +328,28 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 
 <main id="top">
 <div class="hero">
-  <div>
-    <div class="eyebrow">Open research prototype &middot; Apache-2.0</div>
-    <h1>Warn people <em>during</em> the call. Never drop it.</h1>
-    <p class="lede">Real-time warnings for scam calls and cloned voices. If it fails, the call goes on.</p>
-    <div class="cta">
-      <a class="btn cyan" href="#beta">Get the iPhone beta</a>
-      <a class="btn" href="#download">Code on GitHub</a>
-    </div>
-    <div class="trust"><span class="chip"><i></i>Open source</span><span class="chip"><i class="blue"></i>Baselines published</span><span class="chip"><i class="amber"></i>iPhone beta in review</span><span class="chip"><i class="amber"></i>Not proven on real calls</span></div>
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="live-dot"></span> OPEN RESEARCH. HUMAN CONTROL.</div>
+    <h1>A familiar voice.<br>An unfamiliar risk.<br><em>A moment to verify.</em></h1>
+    <p class="lede">A voice can sound real. The request can still be a scam. ShieldCall brings language and voice signals together to explore a timely warning, while the conversation is still happening.</p>
+    <div class="cta"><a class="btn cyan" href="#experience">Explore the demo <span aria-hidden="true">↗</span></a><a class="btn" href="#beta">Join the iPhone beta</a></div>
+    <div class="hero-proof"><span>01 / Language signals</span><span>02 / Voice signals</span><span>03 / You decide</span></div>
+    <p class="note">Open-source research prototype. Real-call effectiveness remains unproven. <a href="#status">See the current evidence →</a></p>
   </div>
+  <div class="hero-visual">
+    <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+    <span class="visual-label">DESIGNED FOR THE MOMENT THAT MATTERS</span>
+    <div class="hero-phone"><img src="assets/app/live-protect.webp" alt="ShieldCall Live Protect prototype, showing the listening interface before any speech is scored" width="540" height="1170" fetchpriority="high"></div>
+    <div class="signal-float signal-a"><span class="live-dot"></span> Two signals. One clearer picture.</div>
+    <div class="signal-float signal-b"><span aria-hidden="true">↗</span><div><b>A prompt to pause.</b><small>Verify on a number you trust.</small></div></div>
+    <p class="visual-caption">Actual prototype interface · listening state</p>
+  </div>
+</div>
+<div class="project-strip"><span>BUILT IN THE OPEN</span><a href="https://github.com/vmercel/shieldcall-core">Apache-2.0 source ↗</a><a href="#roadmap">Reproducible benchmarks ↗</a><a href="#how">Consent-first design ↗</a><a href="#status">Transparent progress ↗</a></div>
 
-  <div>
-    <div class="sim" id="sim" aria-label="Interactive illustration of the two-stream detector">
+<section id="experience">
+  <div class="sec-head reveal"><div class="eyebrow">01 / EXPERIENCE THE IDEA</div><h2>Same call. Two different clues.</h2></div>
+  <div class="sim" id="sim" aria-label="Interactive illustration of the two-stream detector">
       <div class="sim-head">
         <div class="tabs" role="tablist" aria-label="Choose a scripted call">
           <button class="tab" role="tab" aria-selected="true" data-s="a">Human voice, scam script</button>
@@ -339,8 +373,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
       </div>
     </div>
     <p class="caption">Scripted illustration, not measured results.</p>
-  </div>
-</div>
+</section>
 
 <section id="problem">
   <div class="sec-head reveal">
@@ -740,7 +773,7 @@ cd ShieldCallAI
 
 <footer>
   <div class="wrap" style="padding:0">
-    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#04696176676168727166656a63776d446369656d682a676b69"><span class="__cf_email__" data-cfemail="14797166777178626176757a73677d547379757d783a777b79">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
+    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#573a322534323b212235363930243e17303a363e3b7934383a"><span class="__cf_email__" data-cfemail="89e4ecfbeaece5fffcebe8e7eefae0c9eee4e8e0e5a7eae6e4">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
     <p>Sources for the figures: <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC</a>, <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 report</a>, <a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC</a>.</p>
   </div>
 </footer>
