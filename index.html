@@ -219,13 +219,39 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
 .reveal.in{opacity:1;transform:none}
 .no-js .reveal{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.stg.now .dot{animation:none}}
+/* architecture section */
+.gapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:8px 0 18px}
+.gapgrid .card h3{margin:0 0 8px;font-size:17px}
+.gapgrid .card.hot{border:2px solid var(--act);background:#FFF8F6}
+.gapgrid ul,.stg ul{margin:0;padding-left:18px;font-size:14.5px;color:#26343F}
+.gapgrid li,.stg li{margin:4px 0}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:0 0 6px}
+.proof div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.proof b{display:block;font:700 26px var(--display)}
+.proof b.r{color:var(--act)}
+.proof span{font-size:13px;color:var(--mute)}
+.e2e{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;text-align:left;margin:14px 0 8px;position:relative}
+.stg{text-align:left;background:#fff;border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:10px;padding:14px 14px 12px;position:relative;min-width:0}
+.stg.l{border-top-color:var(--li)}.stg.a{border-top-color:var(--ac)}.stg.f{border-top-color:var(--act)}
+.stg .n{font:700 11px var(--mono);letter-spacing:.1em;color:var(--mute)}
+.stg h4{margin:2px 0 8px;font-size:16px}
+.stg .tag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin:6px 4px 0 0}
+.tg-m{background:#E4F3EA;color:#1f6a3e}.tg-i{background:#FFF1D6;color:#7a5200}.tg-p{background:#EEF1F4;color:#52606D}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:s;margin:12px 0 20px}
+.pipe .card{counter-increment:s;position:relative;padding-top:34px}
+.pipe .card:before{content:counter(s);position:absolute;top:-1px;left:-1px;background:var(--navy);color:var(--brand);font:700 13px var(--mono);width:30px;height:30px;border-radius:10px 0 10px 0;display:grid;place-items:center}
+.pipe h4{margin:0 0 6px;font-size:15.5px}.pipe p{margin:0;font-size:14px;color:#33414D}
+.tbl-wrap{overflow-x:auto}
+.hist td:nth-child(2){font-family:var(--mono);white-space:nowrap}
+.hist tr.rej td{color:#8a3a29}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
   <a class="brand" href="#top"><img src="assets/shieldcall-icon-96.png" alt="" width="34" height="34">ShieldCall</a>
-  <nav><a href="#problem" class="hide-s">Problem</a><a href="#how" class="hide-s">Solution</a><a href="#app" class="hide-s">App</a><a href="#roadmap" class="hide-s">Roadmap</a><a href="#beta">iPhone beta</a><a href="#download" class="hide-s">Code</a><a href="#interest">Declare interest</a></nav>
+  <nav><a href="#problem" class="hide-s">Problem</a><a href="#how" class="hide-s">Solution</a><a href="#architecture" class="hide-s">Architecture</a><a href="#app" class="hide-s">App</a><a href="#roadmap" class="hide-s">Roadmap</a><a href="#beta">iPhone beta</a><a href="#download" class="hide-s">Code</a><a href="#interest">Declare interest</a></nav>
 </header>
 
 <main id="top">
@@ -338,6 +364,115 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
     <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0B6F8C" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h16M4 6h16M4 18h10"/></svg></span>Honest about limits</h3><p>It abstains when unsure or out of its tested range. First targets are VoIP and contact-center channels, not native cellular audio.</p></div>
   </div>
 </section>
+<section id="architecture">
+  <div class="sec-head reveal">
+    <div class="eyebrow">The architecture</div>
+    <h2>What exists, what is missing, and what we are building</h2>
+    <p>Voice-spoof detectors are built and scored on clean studio speech. Scam detectors read text and ignore the voice. Neither tells the person on the call what to do next. ShieldCall is a research effort to close that gap for <em>telephone</em> conditions, and to measure honestly how far it gets.</p>
+  </div>
+
+  <div class="gapgrid reveal">
+    <div class="card"><h3>What exists today</h3><ul>
+      <li>Caller-ID attestation (STIR/SHAKEN) says a number was signed, not what is said or whether the voice is real.</li>
+      <li>Anti-spoofing models and public benchmarks, mostly on wideband, studio-quality audio.</li>
+      <li>Scam-text classifiers that never hear the voice.</li></ul></div>
+    <div class="card hot"><h3>The gap</h3><ul>
+      <li>Phone audio is narrowband, compressed by codecs (G.711, AMR, Opus) and noisy. Detectors tuned on clean speech degrade there.</li>
+      <li>Language and voice are judged separately, so a cloned voice with calm wording, or a real voice running a scam script, can slip through.</li>
+      <li>Detectors output scores, not a calm next step for a non-expert.</li></ul></div>
+    <div class="card"><h3>What ShieldCall targets</h3><ul>
+      <li>Train and test on telephone channels from the start, with real codecs and noise.</li>
+      <li>Score language and voice in parallel and treat their <em>disagreement</em> as information.</li>
+      <li>Recommend, never block; abstain when unsure; keep the call running if the detector fails.</li></ul></div>
+  </div>
+
+  <h3 class="reveal" style="margin:26px 0 6px">The gap shows up in our own measurements</h3>
+  <p class="reveal" style="max-width:760px;margin:0 0 12px;color:#33414D">Same fixed model, no re-tuning, equal error rate (lower is better). Accuracy drops as the audio gets closer to real phone conditions.</p>
+  <div class="proof reveal">
+    <div><b>10.05%</b><span>ASVspoof 2019 LA, clean studio speech (official protocol sample)</span></div>
+    <div><b class="r">22.63%</b><span>ASVspoof 5 sample: realistic source audio and 11 codecs</span></div>
+    <div><b class="r">27.9%</b><span>our locked test, noise at 0 dB</span></div>
+    <div><b>49.5%</b><span>one ASVspoof 5 attack (A28) is not detected at all</span></div>
+  </div>
+  <p class="note reveal" style="margin-top:8px">Measured baselines with limits, not claims about real calls. Details in the roadmap section below.</p>
+
+  <h3 class="reveal" style="margin:30px 0 4px">End to end: from the call to the warning</h3>
+  <p class="reveal" style="max-width:760px;margin:0 0 4px;color:#33414D">Five stages run beside the call. Tags show the honest status of each: <span class="tag tg-m" style="margin:0">measured</span> has numbers in the public repo, <span class="tag tg-i" style="margin:0">implemented</span> exists in code but is not validated on real calls, <span class="tag tg-p" style="margin:0">planned</span> is designed only.</p>
+  <div class="e2e reveal">
+    <div class="stg"><div class="n">1 &middot; CAPTURE</div><h4>Consent and listen</h4><ul>
+      <li>Person starts a protected call and consents</li>
+      <li>Phone mic hears the other side on speaker</li>
+      <li>Analysis starts only after consent</li></ul>
+      <span class="tag tg-i">implemented (app)</span></div>
+    <div class="stg"><div class="n">2 &middot; FRONT END</div><h4>Telephone-aware audio</h4><ul>
+      <li>Resample to the 8 kHz phone band</li>
+      <li>Voice activity detection, framing</li>
+      <li>Channel simulator: band-limit, &micro;-law, packet loss</li></ul>
+      <span class="tag tg-i">implemented (core)</span></div>
+    <div class="stg l"><div class="n">3a &middot; LANGUAGE</div><h4>Scam-script stream</h4><ul>
+      <li>Transcript fragments (ASR is a planned input)</li>
+      <li>Locked 22-category lexicon: authority, urgency, secrecy, payment</li>
+      <li>Stage tracker follows the script as it unfolds</li></ul>
+      <span class="tag tg-m">measured on text</span></div>
+    <div class="stg a"><div class="n">3b &middot; VOICE</div><h4>Synthetic-speech stream</h4><ul>
+      <li>wav2vec 2.0 features, early layers pooled</li>
+      <li>Light logistic head, trained on codec- and noise-degraded views</li>
+      <li>Runs on a CPU, no GPU</li></ul>
+      <span class="tag tg-m">measured</span></div>
+    <div class="stg f"><div class="n">4 &middot; DECIDE</div><h4>Fuse, then advise</h4><ul>
+      <li>Disagreement floors: a real voice reading a scam script still warns</li>
+      <li>Belief over five call hypotheses; picks monitor, warn, challenge, escalate or abstain</li>
+      <li>Fail-open runtime, one isolated session per call</li></ul>
+      <span class="tag tg-i">implemented (simulator)</span></div>
+  </div>
+  <p class="note reveal" style="margin-top:6px">Output to the person: a short, calm prompt such as &ldquo;hang up and call the number on your card&rdquo;. A warning means &ldquo;verify&rdquo;, not &ldquo;this is a scammer&rdquo;.</p>
+
+  <h3 class="reveal" style="margin:30px 0 4px">How the voice model was developed</h3>
+  <p class="reveal" style="max-width:760px;margin:0 0 4px;color:#33414D">The method is the point: a locked protocol, telephone conditions built in, and a rule that an iteration is kept only if it beats the last one on held-out data.</p>
+  <div class="pipe reveal">
+    <div class="card"><h4>Lock first</h4><p>Speaker-disjoint split, held-out attacks and seeds fixed and hashed <em>before</em> any modeling. The test set is never used to fit or tune.</p></div>
+    <div class="card"><h4>Phone-channel views</h4><p>14 conditions, including real G.711, AMR-NB and Opus encoding and noise from 20 down to 0 dB. Train and test see the same kinds of damage.</p></div>
+    <div class="card"><h4>Find where the artifacts live</h4><p>Layer ablation of a self-supervised speech model showed early layers carry most of the signal, so we truncate to 4 layers: about 4x faster on a CPU.</p></div>
+    <div class="card"><h4>Small, honest head</h4><p>Pooled statistics from those layers (6,144 numbers per clip) into logistic regression. Few parameters, easy to audit, cheap to retrain.</p></div>
+    <div class="card"><h4>Accept only if better</h4><p>A change is kept only if validation error improves by more than 0.3 points; the locked test is then scored once. A gain that fails there is rejected and published.</p></div>
+    <div class="card"><h4>Check outside the lab</h4><p>Official ASVspoof 2019 protocol sample, then ASVspoof 5 with codecs and a different corpus, with no tuning on either.</p></div>
+  </div>
+
+  <div class="tbl-wrap reveal"><table class="hist">
+    <thead><tr><th>Iteration</th><th>Test error</th><th>What it taught</th></tr></thead>
+    <tbody>
+      <tr><td>Reference LFCC-GMM</td><td>28% clean, 43% at 0 dB</td><td>Classic features collapse on phone audio and noise</td></tr>
+      <tr><td>LFCC + TDNN with channel-adversarial training</td><td>29.5%</td><td>Small gain on the reference; far from good enough</td></tr>
+      <tr><td>wav2vec 2.0 pooled features + logistic head</td><td>14.4%</td><td>Kept: halves the error, best locked-test result</td></tr>
+      <tr class="rej"><td>4-layer truncation + denoise + more noise views</td><td>17.2%</td><td>Rejected: better on validation, worse on test (validation attacks too easy)</td></tr>
+      <tr><td>Official 2019 protocol sample</td><td>10.05%</td><td>Baseline level; published LFCC-GMM scores 8.09%</td></tr>
+      <tr><td>ASVspoof 5 sample (cross-corpus)</td><td>22.63%</td><td>Codecs and realistic audio roughly double the error</td></tr>
+    </tbody></table></div>
+  <p class="note reveal" style="margin-top:8px">Test error is equal error rate. Rows use different test sets (locked subset, official sample, ASVspoof 5 sample), so they are not one leaderboard.</p>
+
+  <h3 class="reveal" style="margin:30px 0 6px">Techniques employed, and where each stands</h3>
+  <div class="tbl-wrap reveal"><table>
+    <thead><tr><th>Technique</th><th>Role in ShieldCall</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Real-codec channel training and testing</td><td>Make the detector see phone audio, not studio audio</td><td>Established practice, applied under a locked protocol; measured</td></tr>
+      <tr><td>Self-supervised speech features (wav2vec 2.0)</td><td>Voice-stream front end</td><td>Published; our contribution is the layer study and CPU-sized truncation</td></tr>
+      <tr><td>Low-SNR training views</td><td>Robustness to noise</td><td>Standard; 0 dB noise is still weak (25&ndash;29%)</td></tr>
+      <tr><td>Disagreement-aware fusion</td><td>Warn when voice and language disagree</td><td>Our design; shown only on 40 constructed cells so far</td></tr>
+      <tr><td>Scam-script stage tracker</td><td>Language stream</td><td>Measured: a wide locked lexicon works; the stage model did not beat it</td></tr>
+      <tr><td>Belief-based advice with abstention</td><td>Choose a calm next step, say &ldquo;unsure&rdquo;</td><td>Simulator only; not tested with people</td></tr>
+      <tr><td>Paired-channel nuisance projection</td><td>Remove channel effects</td><td>Tried and rejected</td></tr>
+    </tbody></table></div>
+  <p class="reveal" style="max-width:780px;margin:12px 0 0;color:#33414D"><strong>On novelty.</strong> Each building block above is a published technique or a recorded negative result. What the project adds is the assembly for telephone conditions, a reproducible locked protocol, and honest numbers. We make no claim of state of the art or of a new primitive.</p>
+
+  <div class="card reveal" style="margin-top:16px;background:#E3F5FA;border-color:#0B6F8C">
+    <h3 style="margin:0 0 6px">Next experiments (hypotheses, not results)</h3>
+    <ul style="margin:0;padding-left:18px;font-size:14.5px"><li>A harder validation set with held-out attacks, so accepted gains actually transfer.</li>
+    <li>Training on ASVspoof 5 data and reporting minDCF, the metric that benchmark uses.</li>
+    <li>Noise-conditioned scoring and consistency checks across several views of the same call.</li>
+    <li>Real consented lab recordings. A prior-art search comes before any claim of novelty.</li></ul>
+  </div>
+</section>
+
 <section id="app">
   <div class="sec-head reveal">
     <div class="eyebrow">The app</div>
@@ -539,7 +674,7 @@ cd ShieldCallAI
 
 <footer>
   <div class="wrap" style="padding:0">
-    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#54393126373138222136353a33273d143339353d387a373b39"><span class="__cf_email__" data-cfemail="224f475041474e545740434c45514b62454f434b4e0c414d4f">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
+    <p><b>ShieldCall</b> is an independent research project by Mercel Vubangsi (PhD Physics, University of Dschang; MSc Artificial Intelligence Engineering, Near East University). Contact: <a href="/cdn-cgi/l/email-protection#24494156474148525146454a43574d644349454d480a474b49"><span class="__cf_email__" data-cfemail="2a474f58494f465c5f484b444d59436a4d474b434604494547">[email&#160;protected]</span></a> &middot; <a href="https://scholar.google.com/citations?user=t9ytC0UAAAAJ" rel="noopener">Google Scholar</a> &middot; <a href="https://github.com/vmercel" rel="noopener">GitHub</a></p>
     <p>Sources for the figures: <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025" rel="noopener">FTC</a>, <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" rel="noopener">FBI IC3 2025 report</a>, <a href="https://www.fcc.gov/document/fcc-makes-ai-generated-voices-robocalls-illegal" rel="noopener">FCC</a>.</p>
   </div>
 </footer>
