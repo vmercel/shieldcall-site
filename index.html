@@ -569,6 +569,16 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
   </div>
   <p class="note reveal" style="margin:6px 0 0">Equal error rate, different test sets, so not one leaderboard.</p>
 
+  <h3 class="reveal ah">Phone codecs, against the organizers&rsquo; own baselines</h3>
+  <div class="chart reveal" id="chart4" aria-label="ASVspoof 2021 LA full evaluation set, pooled equal error rate, lower is better">
+    <div class="cr"><span>LFCC-GMM</span><div class="bar2"><i class="ref" style="--w:48.25%"></i></div><b>19.30%</b></div>
+    <div class="cr"><span>CQCC-GMM</span><div class="bar2"><i class="ref" style="--w:39.05%"></i></div><b>15.62%</b></div>
+    <div class="cr"><span>ShieldCall</span><div class="bar2"><i class="hi" style="--w:33.55%"></i></div><b>13.42%</b></div>
+    <div class="cr"><span>RawNet2</span><div class="bar2"><i class="ref" style="--w:23.75%"></i></div><b>9.50%</b></div>
+    <div class="cr"><span>LFCC-LCNN</span><div class="bar2"><i class="ref" style="--w:23.15%"></i></div><b>9.26%</b></div>
+  </div>
+  <p class="note reveal" style="margin:6px 0 0">ASVspoof 2021 LA, all 148,176 trials, official scorer. Third of five, mid-table. Steadier across codecs (11&ndash;14%) than the weakest baseline (13&ndash;36%). Studio speech, not real calls. <a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE7_ASVSPOOF2021_LA.md" rel="noopener">Report</a></p>
+
   <h3 class="reveal ah">Techniques, and where each stands</h3>
   <div class="tech reveal">
     <div class="tc"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#0B6F8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg><b>Real-codec training</b><i class="s1">Measured</i></div>
@@ -647,7 +657,7 @@ ul.tick li.part::before{background:linear-gradient(90deg,var(--ok) 50%,#fff 50%)
             <div class="cr"><span>ASVspoof 5 sample</span><div class="bar2"><i class="hi" style="--w:56.6%"></i></div><b>22.63%</b></div>
           </div>
           <p class="note">Official 2019 sample vs published baselines*, then ASVspoof 5 with codecs. Studio audio, not real calls.</p>
-          <ul class="tick"><li class="ok">Four recipes tried, one rejected; errors double on ASVspoof 5</li><li class="part">Prototype app; iPhone build in beta review</li><li class="todo">Next: harder validation, ASVspoof 5 training, minDCF</li></ul>
+          <ul class="tick"><li class="ok">Four recipes tried, one rejected; errors double on ASVspoof 5</li><li class="part">Prototype app; iPhone build in beta review</li><li class="todo">Next: harder validation, ASVspoof 5 training, real calls</li></ul>
           <div class="links"><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE5_OFFICIAL_PROTOCOL.md" rel="noopener">Official-protocol report</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE6_ASVSPOOF5.md" rel="noopener">ASVspoof 5 report</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE3_ITERATIONS.md" rel="noopener">Phase 3 log</a><a href="https://github.com/vmercel/shieldcall-core/blob/main/docs/results/PHASE4_ITERATIONS.md" rel="noopener">Phase 4 log (a failed result)</a></div>
         </div>
         <div>
@@ -901,7 +911,7 @@ var D={
 call:['Live call and consent','implemented','Implemented in the app','The person consents, puts the other phone on speaker, and this phone listens.','Not yet used on real calls beyond developer testing.'],
 front:['Phone front end','implemented','Implemented in the detector','Audio goes to the 8 kHz phone band, then voice-activity detection. A simulator adds codec, noise and packet-loss damage for testing.','Public code and tests in shieldcall-core.'],
 lang:['Language stream','measured','Measured on text only','A locked 22-category lexicon scores scam tactics; a stage tracker follows the script. Speech-to-text is planned.','Wide lexicon AUC about 0.84 vs 0.55 for narrow keywords. The stage model did not beat it.'],
-voice:['Voice stream','measured','Measured on public benchmarks','Early wav2vec 2.0 layers, pooled to 6,144 numbers, scored by a small logistic head trained on codec and noise views.','EER 10.05% (2019 sample), 14.4% (locked subset), 22.63% (ASVspoof 5). Not proven on real calls.'],
+voice:['Voice stream','measured','Measured on public benchmarks','Early wav2vec 2.0 layers, pooled to 6,144 numbers, scored by a small logistic head trained on codec and noise views.','EER 10.05% (2019 sample), 13.42% (2021 phone codecs, full set), 14.4% (locked subset), 22.63% (ASVspoof 5). Not proven on real calls.'],
 fusion:['Fusion by disagreement','implemented','Tested on constructed cases','Disagreement raises attention instead of cancelling out: a real voice reading a scam script still warns.','Recall 1.00 vs 0.30 for a naive sum on 40 constructed cells. Watch false alerts. No real streams yet.'],
 agent:['Adviser with abstention','implemented','Simulator only','Weighs five call hypotheses and picks monitor, warn, challenge, escalate or abstain. It never blocks the call.','On four real-score test calls it still challenged genuine calls. Not yet reliable.'],
 person:['What the person sees','planned','Designed, not tested with people','A short, calm prompt such as "hang up and call the number on your card". If the detector fails, the call continues.','Needs a consented lab study.'],
@@ -923,8 +933,8 @@ root.querySelectorAll('.nd').forEach(function(n){
 root.querySelectorAll('.adg-btns button').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-k'))})});
 show('voice');
 })();
-(function(){var c=document.getElementById('chart3');if(!c)return;
-if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){c.classList.add('go');o.disconnect();}})},{threshold:.3});o.observe(c);}else{c.classList.add('go');}})();
+['chart3','chart4'].forEach(function(id){var c=document.getElementById(id);if(!c)return;
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){c.classList.add('go');o.disconnect();}})},{threshold:.3});o.observe(c);}else{c.classList.add('go');}});
 </script>
 </body>
 </html>
